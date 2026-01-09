@@ -1,45 +1,29 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
-
+import { Text, View, TouchableOpacity } from 'react-native';
+import { users } from './src/utils/userUtils.js';
+import React, { useState } from 'react';
+import CounterScreen from './src/screens/CounterScreen.js'
+import PostListScreen from './src/screens/PostListScreen.js'
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
-}
+    <View>
+      <Text> Test 1 </Text>
+      <Text> Expected Output </Text>
+      {users?.map(user => {
+        if (user.isActive) {
+          return (
+            <Text key={user.id}>
+              id: {user.id}, name: {user.name}, age: {user.age}`
+            </Text>
+          );
+        }
+      })}
 
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
+      <CounterScreen />
+      <PostListScreen />
 
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;
